@@ -14,8 +14,8 @@ let resultArea = document.getElementById("result-area")
 
 
 goButton.addEventListener("click",go)
-
-inputNum.addEventListener("focus",function(){inputNum.value=""}) // inputNum.value = "" .value가 뭔지 모르겠고, 왜 "" 를 넣는 건지도 모르겠음
+resetButton.addEventListener("click",reset)
+inputNum.addEventListener("focus",function(){inputNum.value=""}) // inputNum.value = "" .value가 뭔지 모르겠고, 왜 "" 를 넣는 건지도 모르겠음, "focus" 라는 타입이 하는 기능을 모르겠음
 
 function go(){
   let userValue = inputNum.value
@@ -39,6 +39,9 @@ function go(){
   }
 }
 
+function reset(){
+
+}
 
 
 function randomNumber(){
