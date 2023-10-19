@@ -11,7 +11,10 @@ let inputNum = document.getElementById("inputNumber")
 let goButton = document.getElementById("go-button")
 let resetButton = document.getElementById("reset-button")
 let resultArea = document.getElementById("result-area")
-
+let chances = 5
+let chanceArea = document.getElementById("chance-area")
+let history = []
+let gameOver = false
 
 goButton.addEventListener("click",go)
 resetButton.addEventListener("click",reset)
@@ -24,24 +27,41 @@ function go(){
     resultArea.textContent = "1과 100사이의 숫자를 넣어주세요."
     return
   }
+  if(history.includes(userValue)){
+    resultArea.textContent = "이미 입력된 숫자 입니다."
+    return
+  }
+
+  chances --
+  chanceArea.textContent = `정답은 ${chances}번 남았다.`
+  console.log("chance", chances)
 
   if(userValue < number){
     resultArea.textContent = "UP!"
-    return
   }
   else if(userValue > number){
     resultArea.textContent = "Down!"
-    return
   }
   else{
     resultArea.textContent = "정답입니다!"
-    return
+    gameOver = true
   }
+  
+  history.push(userValue)
+  console.log(history)
+
+  if(chances < 1){
+    gameOver = true
+  }
+  if(gameOver == true){
+    goButton.disabled = true
+  }
+
 }
 
-function reset(){
 
-}
+
+
 
 
 function randomNumber(){
@@ -50,7 +70,18 @@ function randomNumber(){
 }
 
 
-
+function reset(){
+  //user input창이 깨끗하게 정리
+   inputNum.value = "" 
+  //새로운 번호 생성
+  randomNumber()
+  resultArea.textContent = "결과 값이 여기 나옵니다."
+  chances = 5
+  chanceArea.textContent = `정답은 ${chances}번 남았다.`
+  gameOver = false
+  goButton.disabled = false
+  history = []
+ }
 
 
 randomNumber()
